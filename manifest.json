@@ -4,7 +4,7 @@
     "description": "A toggle tracker for github projects",
     "version": "1.0",
     "action": {
-      "default_popup": "src/default.html",
+      "default_popup": "html/default.html",
       "default_icon": "resources/hello_extensions.png"
     }
 }
