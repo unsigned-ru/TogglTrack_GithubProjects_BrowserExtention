@@ -4,7 +4,27 @@
     "description": "A toggle tracker for github projects",
     "version": "1.0",
     "action": {
-      "default_popup": "html/default.html",
-      "default_icon": "resources/hello_extensions.png"
+      "default_popup": "default.html",
+      "default_icon": "hello_extensions.png"
+    },
+    "permissions": [
+      "storage"
+    ],
+    "options_ui": {
+      "page": "options.html",
+      "open_in_tab": false
+    },
+    "host_permissions": ["*://*/*"],
+    "content_scripts": [
+      {
+        "js": ["github_projects.js"],
+        "matches": [
+          "https://github.com/*/*/projects/*"
+        ]
+      }
+    ],
+    "background": {
+      "service_worker": "background.js",
+      "type": "module"
     }
 }
