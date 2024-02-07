@@ -20,7 +20,7 @@ var elementIds =
         issue: ".Box-sc-g0xbh4-0.jAidiD.markdown-title",
         draft: ".Text-sc-17v1xeu-0.gPDEWA",
     },
-    projectName: ".Text-sc-17v1xeu-0.cwKGMJ"
+    projectName: ".Link__StyledLink-sc-14289xe-0.fjOwai"
 }
 
 
@@ -126,9 +126,17 @@ async function TrackTimer_Clicked()
     let descriptionElement = await WaitForNonNullAsync(() => primerPortalRoot.querySelector(elementIds.titleBdi[panelType]));
     req.options.description = descriptionElement.innerText;
 
-    //get project
-    let projectElement = await WaitForNonNullAsync(() => document.querySelector(elementIds.projectName));
-    req.options.project = projectElement.innerText;
+    //get project (if it's an issue, non issues cannot be assigned a project)
+    if (panelType == "issue")
+    {
+        let projectElement = await WaitForNonNullAsync(() => document.querySelector(elementIds.projectName));
+        req.options.project = projectElement.innerText;
+    }
+    else
+    {
+        req.options.project = null;
+    }
+   
 
     let res = await chrome.runtime.sendMessage(req);
 
